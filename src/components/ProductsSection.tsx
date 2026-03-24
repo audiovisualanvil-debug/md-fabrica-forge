@@ -1,16 +1,12 @@
-import { MessageCircle } from "lucide-react";
-
-const WA_LINK = "https://wa.me/5551997859061?text=Olá,+vim+pelo+site+e+gostaria+de+um+orçamento";
+import { MessageCircle, Settings } from "lucide-react";
 
 const products = [
-  { name: "Coroa Planetária", brand: "Caterpillar", code: "156-1930" },
-  { name: "Eixo Curto 3C", brand: "JCB", code: "914/88101" },
-  { name: "Semi-Eixo Completo", brand: "JCB", code: "914/60109" },
-  { name: "Tampa CAT", brand: "Caterpillar", code: "1307027" },
-  { name: "Garfo Longo", brand: "JCB", code: "914/86301" },
-  { name: "Eixo Longo 960mm", brand: "JCB", code: "914/86204" },
-  { name: "Articulador", brand: "JCB", code: "914/86203" },
-  { name: "Eixo Curto", brand: "JCB", code: "914/86201" },
+  { name: "ENGRENAGEM", brand: "CATERPILLAR", code: "2105934" },
+  { name: "SEMI-EIXO", brand: "CATERPILLAR", code: "2105946" },
+  { name: "SEMI-EIXO", brand: "JCB", code: "914/60109" },
+  { name: "CUBO", brand: "JCB", code: "458/20501" },
+  { name: "COROA", brand: "CASE", code: "100561A1" },
+  { name: "SEMI-EIXO", brand: "CASE", code: "144461A1" },
 ];
 
 const ProductsSection = () => (
@@ -25,31 +21,39 @@ const ProductsSection = () => (
         </h2>
       </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {products.map((p) => (
           <div
             key={p.code}
-            className="bg-background border border-border rounded-lg p-5 flex flex-col hover:border-primary/50 transition-colors group"
+            className="rounded-lg flex flex-col transition-all duration-300 group hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10"
+            style={{
+              backgroundColor: "#1a1a1a",
+              borderWidth: 1,
+              borderStyle: "solid",
+              borderColor: "#2a2a2a",
+            }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = "#CC1414"; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = "#2a2a2a"; }}
           >
-            <div className="w-full h-28 bg-secondary rounded flex items-center justify-center mb-4">
-              <span className="font-heading text-3xl font-black text-muted-foreground/30 uppercase">
-                {p.brand.slice(0, 3)}
-              </span>
+            <div className="w-full h-36 rounded-t-lg flex items-center justify-center" style={{ backgroundColor: "#111111" }}>
+              <Settings className="w-14 h-14 text-muted-foreground/20" />
             </div>
-            <span className="text-xs text-primary font-bold uppercase">{p.brand}</span>
-            <h3 className="font-heading text-lg font-bold text-foreground mt-1">{p.name}</h3>
-            <span className="text-xs text-muted-foreground mt-1 mb-4">
-              Cód: {p.code}
-            </span>
-            <a
-              href={`${WA_LINK}+—+Peça:+${p.name}+(${p.code})`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-auto inline-flex items-center justify-center gap-2 border border-primary text-primary px-4 py-2 rounded text-sm font-bold uppercase tracking-wide hover:bg-primary hover:text-primary-foreground transition-colors"
-            >
-              <MessageCircle className="w-3.5 h-3.5" />
-              Consultar
-            </a>
+            <div className="p-5 flex flex-col flex-1">
+              <span className="text-xs text-primary font-black uppercase tracking-wide">{p.brand}</span>
+              <h3 className="font-heading text-lg font-bold text-foreground mt-1 uppercase">{p.name}</h3>
+              <span className="text-xs text-muted-foreground mt-1 mb-5">
+                Cód: {p.code}
+              </span>
+              <a
+                href={`https://wa.me/5551997859061?text=Olá,+tenho+interesse+na+peça+${p.code}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-auto inline-flex items-center justify-center gap-2 bg-whatsapp text-whatsapp-foreground px-4 py-2.5 rounded text-sm font-bold uppercase tracking-wide hover:brightness-110 transition"
+              >
+                <MessageCircle className="w-4 h-4" />
+                Consultar WhatsApp
+              </a>
+            </div>
           </div>
         ))}
       </div>

@@ -47,13 +47,23 @@ const TestimonialsSection = () => (
             <p className="text-foreground text-sm leading-relaxed mb-6 italic">
               "{t.text}"
             </p>
-            <div>
-              <span className="font-heading font-bold text-foreground">
-                {t.author}
-              </span>
-              <p className="text-xs text-muted-foreground mt-0.5">
-                {t.role} · {t.location}
-              </p>
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
+                <span className="text-primary-foreground font-heading font-black text-sm">
+                  {t.author.charAt(0)}
+                </span>
+              </div>
+              <div>
+                <span className="font-heading font-bold text-foreground block">
+                  {t.author}
+                </span>
+                <p className="text-xs text-muted-foreground">
+                  {t.role}
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  {t.location}
+                </p>
+              </div>
             </div>
           </div>
         ))}
