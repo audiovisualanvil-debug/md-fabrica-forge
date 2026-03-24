@@ -1,4 +1,4 @@
-import { MessageCircle, ArrowRight, Truck } from "lucide-react";
+import { MessageCircle, ArrowRight, Truck, Clock } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const WA_LINK = "https://wa.me/5551997859061?text=Olá,+vim+pelo+site+e+gostaria+de+um+orçamento";
@@ -46,6 +46,10 @@ const HeroSection = () => (
           >
             Ver Catálogo <ArrowRight className="w-4 h-4" />
           </a>
+        </div>
+        <div className="flex items-center gap-2 mt-4">
+          <Clock className="w-4 h-4 text-muted-foreground" />
+          <span className="text-xs text-muted-foreground">Respondemos em até 2 horas em dias úteis</span>
         </div>
       </div>
 
