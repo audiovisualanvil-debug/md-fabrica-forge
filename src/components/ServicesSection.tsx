@@ -33,26 +33,17 @@ const ServicesSection = () => (
         </h2>
       </div>
 
-      <a
-        href={INSTAGRAM_POST}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block mx-auto mb-12 max-w-[540px] relative group rounded-lg overflow-hidden"
-      >
-        <img
-          src={instagramThumb}
-          alt="Vídeo MD Fábrica no Instagram"
-          className="w-full rounded-lg"
+      <div className="flex justify-center mb-12">
+        <iframe
+          src="https://www.instagram.com/p/C__rMEdRl4d/embed/"
+          width="100%"
+          style={{ maxWidth: 540, border: "none", borderRadius: 8, overflow: "hidden" }}
+          scrolling="no"
+          allowTransparency={true}
+          height={600}
+          title="Vídeo MD Fábrica no Instagram"
         />
-        <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition-colors">
-          <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center">
-            <Play className="w-7 h-7 text-primary-foreground fill-primary-foreground ml-1" />
-          </div>
-        </div>
-        <span className="absolute bottom-3 left-1/2 -translate-x-1/2 text-xs text-white/80 font-bold uppercase tracking-wide">
-          Assistir no Instagram
-        </span>
-      </a>
+      </div>
 
       <div className="grid md:grid-cols-3 gap-6">
         {services.map((s) => (
