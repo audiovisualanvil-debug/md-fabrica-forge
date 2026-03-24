@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Menu, X, MessageCircle } from "lucide-react";
+import logoMd from "@/assets/logo-md.png";
 
 const WA_LINK = "https://wa.me/5551997859061?text=Olá,+vim+pelo+site+e+gostaria+de+um+orçamento";
 

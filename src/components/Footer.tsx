@@ -1,4 +1,4 @@
-const Footer = () => (
+import logoMd from "@/assets/logo-md.png";
   <footer className="bg-background border-t border-border py-12 px-4">
     <div className="container mx-auto grid md:grid-cols-3 gap-8">
       <div>
