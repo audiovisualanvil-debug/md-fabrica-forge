@@ -1,10 +1,10 @@
+import logoMd from "@/assets/logo-md.png";
+
 const Footer = () => (
   <footer className="bg-background border-t border-border py-12 px-4">
     <div className="container mx-auto grid md:grid-cols-3 gap-8">
       <div>
-        <span className="font-heading text-2xl font-black text-foreground">
-          MD <span className="text-primary">FÁBRICA</span>
-        </span>
+        <img src={logoMd} alt="MD Fábrica" className="h-12 mb-3 brightness-0 invert" />
         <p className="text-sm text-muted-foreground mt-3 leading-relaxed">
           Fabricação e comércio de peças para máquinas pesadas. 22 anos de
           tradição no polo metalmecânico de Canoas/RS.
