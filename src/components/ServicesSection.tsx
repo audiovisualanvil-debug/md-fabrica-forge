@@ -32,6 +32,17 @@ const ServicesSection = () => (
         </h2>
       </div>
 
+      <iframe
+        src="https://www.instagram.com/p/C__rMEdRl4d/embed/"
+        width="100%"
+        style={{ maxWidth: 540, display: "block", margin: "0 auto 48px auto", border: "none", borderRadius: 8, overflow: "hidden" }}
+        scrolling="no"
+        allowTransparency
+        frameBorder="0"
+        height="600"
+        title="Vídeo Instagram MD Fábrica"
+      />
+
       <div className="grid md:grid-cols-3 gap-6">
         {services.map((s) => (
           <div
