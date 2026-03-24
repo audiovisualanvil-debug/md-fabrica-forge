@@ -9,6 +9,7 @@ import doosanLogo from "@/assets/brands/doosan.png";
 import sanyLogo from "@/assets/brands/sany.png";
 import bobcatLogo from "@/assets/brands/bobcat.png";
 import yanmarLogo from "@/assets/brands/yanmar.png";
+import clarkMichiganLogo from "@/assets/brands/clark-michigan.png";
 
 const brands = [
   { name: "Case", logo: caseLogo },
@@ -20,7 +21,7 @@ const brands = [
   { name: "Hyundai", logo: hyundaiLogo },
   { name: "Doosan", logo: doosanLogo },
   { name: "Sany", logo: sanyLogo },
-  { name: "Clark Michigan", logo: null },
+  { name: "Clark Michigan", logo: clarkMichiganLogo },
   { name: "Bobcat", logo: bobcatLogo },
   { name: "Yanmar", logo: yanmarLogo },
 ];
