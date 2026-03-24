@@ -1,14 +1,7 @@
-import { MessageCircle, ArrowRight, Factory, Globe, Award, Wrench } from "lucide-react";
+import { MessageCircle, ArrowRight, Truck } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const WA_LINK = "https://wa.me/5551997859061?text=Olá,+vim+pelo+site+e+gostaria+de+um+orçamento";
-
-const stats = [
-  { icon: Award, label: "Anos de Mercado", value: "22+" },
-  { icon: Wrench, label: "Marcas Atendidas", value: "12+" },
-  { icon: Globe, label: "Entrega Nacional", value: "Brasil" },
-  { icon: Factory, label: "Fabricação", value: "Própria" },
-];
 
 const HeroSection = () => (
   <section
@@ -58,20 +51,22 @@ const HeroSection = () => (
 
       <div className="animate-fade-up [animation-delay:200ms] opacity-0">
         <div className="grid grid-cols-2 gap-4">
-          {stats.map((s) => (
-            <div
-              key={s.label}
-              className="bg-card border border-border rounded-lg p-5 flex flex-col items-center text-center hover:border-primary/50 transition-colors"
-            >
-              <s.icon className="w-7 h-7 text-primary mb-2" />
-              <span className="font-heading text-2xl md:text-3xl font-black text-foreground">
-                {s.value}
-              </span>
-              <span className="text-xs text-muted-foreground uppercase tracking-wide mt-1">
-                {s.label}
-              </span>
-            </div>
-          ))}
+          <div className="bg-card border border-border rounded-lg p-6 flex flex-col items-center text-center hover:border-primary/50 transition-colors">
+            <span className="font-heading text-4xl md:text-5xl font-black text-primary">22+</span>
+            <span className="text-xs text-muted-foreground uppercase tracking-widest font-bold mt-2">Anos de Mercado</span>
+          </div>
+          <div className="bg-card border border-border rounded-lg p-6 flex flex-col items-center text-center hover:border-primary/50 transition-colors">
+            <span className="font-heading text-4xl md:text-5xl font-black text-primary">12+</span>
+            <span className="text-xs text-muted-foreground uppercase tracking-widest font-bold mt-2">Marcas Atendidas</span>
+          </div>
+          <div className="bg-card border border-border rounded-lg p-6 flex flex-col items-center text-center hover:border-primary/50 transition-colors">
+            <span className="font-heading text-4xl md:text-5xl font-black text-primary">100%</span>
+            <span className="text-xs text-muted-foreground uppercase tracking-widest font-bold mt-2">Fabricação Própria</span>
+          </div>
+          <div className="bg-card border border-border rounded-lg p-6 flex flex-col items-center text-center hover:border-primary/50 transition-colors">
+            <Truck className="w-10 h-10 md:w-12 md:h-12 text-primary mb-1" />
+            <span className="text-xs text-muted-foreground uppercase tracking-widest font-bold mt-2">Entrega para todo o Brasil</span>
+          </div>
         </div>
       </div>
     </div>

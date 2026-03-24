@@ -34,24 +34,32 @@ const BrandsSection = () => (
       <h2 className="font-heading text-3xl md:text-4xl font-black uppercase mt-3 mb-10 text-foreground">
         Mais de 12 marcas
       </h2>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 max-w-5xl mx-auto">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
         {brands.map((b) => (
           <div
             key={b.name}
-            className="flex flex-col items-center justify-center gap-3 p-5 border border-border rounded-lg bg-background/50 hover:border-primary hover:bg-primary/5 transition-all duration-300 cursor-default group"
+            className="flex flex-col items-center justify-center gap-3 p-6 rounded-lg border transition-all duration-300 cursor-default group"
+            style={{
+              backgroundColor: "#1a1a1a",
+              borderColor: "#2a2a2a",
+            }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = "#CC1414"; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = "#2a2a2a"; }}
           >
-            {b.logo ? (
-              <img
-                src={b.logo}
-                alt={`Logo ${b.name}`}
-                className="h-10 w-auto object-contain brightness-0 invert opacity-60 group-hover:opacity-100 group-hover:brightness-100 group-hover:invert-0 transition-all duration-300"
-              />
-            ) : (
-              <span className="h-10 flex items-center text-lg font-bold text-muted-foreground group-hover:text-primary transition-colors uppercase tracking-wide">
-                {b.name}
-              </span>
-            )}
-            <span className="text-xs text-muted-foreground group-hover:text-primary transition-colors uppercase tracking-wider font-medium">
+            <div className="h-14 w-full flex items-center justify-center">
+              {b.logo ? (
+                <img
+                  src={b.logo}
+                  alt={`Logo ${b.name}`}
+                  className="h-10 w-auto object-contain brightness-0 invert opacity-70 group-hover:opacity-100 transition-opacity duration-300"
+                />
+              ) : (
+                <span className="text-2xl font-black text-muted-foreground/50 font-heading uppercase">
+                  {b.name.split(" ").map(w => w[0]).join("")}
+                </span>
+              )}
+            </div>
+            <span className="text-xs text-foreground/80 uppercase tracking-wider font-medium">
               {b.name}
             </span>
           </div>
