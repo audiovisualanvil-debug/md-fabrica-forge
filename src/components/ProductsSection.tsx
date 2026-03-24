@@ -60,9 +60,9 @@ const ProductsSection = () => {
               onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = "#CC1414"; }}
               onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = "#2a2a2a"; }}
             >
-              <div className="w-full h-36 rounded-t-lg flex items-center justify-center" style={{ backgroundColor: "#111111" }}>
+              <div className="w-full h-44 rounded-t-lg flex items-center justify-center overflow-hidden" style={{ backgroundColor: "#111111" }}>
                 {p.image ? (
-                  <img src={p.image} alt={p.name} className="w-full h-full object-cover rounded-t-lg" />
+                  <img src={p.image} alt={p.name} className="w-full h-full object-contain p-3" />
                 ) : (
                   <Settings className="w-14 h-14 text-muted-foreground/20" />
                 )}
