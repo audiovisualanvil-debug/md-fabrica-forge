@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { MessageCircle, Settings, Search } from "lucide-react";
+import product2105946 from "@/assets/product-2105946.png";
 
 const products = [
-  { name: "ENGRENAGEM", brand: "CATERPILLAR", code: "2105934" },
-  { name: "SEMI-EIXO", brand: "CATERPILLAR", code: "2105946" },
-  { name: "SEMI-EIXO", brand: "JCB", code: "914/60109" },
-  { name: "CUBO", brand: "JCB", code: "458/20501" },
-  { name: "COROA", brand: "CASE", code: "100561A1" },
-  { name: "SEMI-EIXO", brand: "CASE", code: "144461A1" },
+  { name: "ENGRENAGEM", brand: "CATERPILLAR", code: "2105934", image: null },
+  { name: "SEMI-EIXO", brand: "CATERPILLAR", code: "2105946", image: product2105946 },
+  { name: "SEMI-EIXO", brand: "JCB", code: "914/60109", image: null },
+  { name: "CUBO", brand: "JCB", code: "458/20501", image: null },
+  { name: "COROA", brand: "CASE", code: "100561A1", image: null },
+  { name: "SEMI-EIXO", brand: "CASE", code: "144461A1", image: null },
 ];
 
 const ProductsSection = () => {
@@ -60,7 +61,11 @@ const ProductsSection = () => {
               onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor = "#2a2a2a"; }}
             >
               <div className="w-full h-36 rounded-t-lg flex items-center justify-center" style={{ backgroundColor: "#111111" }}>
-                <Settings className="w-14 h-14 text-muted-foreground/20" />
+                {p.image ? (
+                  <img src={p.image} alt={p.name} className="w-full h-full object-cover rounded-t-lg" />
+                ) : (
+                  <Settings className="w-14 h-14 text-muted-foreground/20" />
+                )}
               </div>
               <div className="p-5 flex flex-col flex-1">
                 <span className="text-xs text-primary font-black uppercase tracking-wide">{p.brand}</span>
