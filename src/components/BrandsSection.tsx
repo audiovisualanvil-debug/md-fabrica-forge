@@ -1,4 +1,4 @@
-import caterpillarLogo from "@/assets/brands/caterpillar.png";
+import caterpillarLogo from "@/assets/brands/caterpillar.webp";
 import jcbLogo from "@/assets/brands/jcb.png";
 import caseLogo from "@/assets/brands/case.png";
 import komatsuLogo from "@/assets/brands/komatsu.png";
