@@ -1,6 +1,8 @@
-import { Cog, Wrench, Truck, MessageCircle } from "lucide-react";
+import { Cog, Wrench, Truck, MessageCircle, Play } from "lucide-react";
+import instagramThumb from "@/assets/instagram-thumb.png";
 
 const WA_LINK = "https://wa.me/5551997859061?text=Olá,+vim+pelo+site+e+gostaria+de+um+orçamento";
+const INSTAGRAM_POST = "https://www.instagram.com/p/C__rMEdRl4d/";
 
 const services = [
   {
