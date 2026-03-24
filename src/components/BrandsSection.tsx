@@ -51,7 +51,7 @@ const BrandsSection = () => (
                 <img
                   src={b.logo}
                   alt={`Logo ${b.name}`}
-                  className="h-10 w-auto object-contain brightness-0 invert opacity-70 group-hover:opacity-100 transition-opacity duration-300"
+                  className="h-10 w-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-300"
                 />
               ) : (
                 <span className="text-2xl font-black text-muted-foreground/50 font-heading uppercase">
