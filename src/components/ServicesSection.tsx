@@ -1,6 +1,8 @@
-import { Cog, Wrench, Truck, MessageCircle } from "lucide-react";
+import { Cog, Wrench, Truck, MessageCircle, Play } from "lucide-react";
+import instagramThumb from "@/assets/instagram-thumb.png";
 
 const WA_LINK = "https://wa.me/5551997859061?text=Olá,+vim+pelo+site+e+gostaria+de+um+orçamento";
+const INSTAGRAM_POST = "https://www.instagram.com/p/C__rMEdRl4d/";
 
 const services = [
   {
@@ -32,16 +34,26 @@ const ServicesSection = () => (
         </h2>
       </div>
 
-      <iframe
-        src="https://www.instagram.com/p/C__rMEdRl4d/embed/"
-        width="100%"
-        style={{ maxWidth: 540, display: "block", margin: "0 auto 48px auto", border: "none", borderRadius: 8, overflow: "hidden" }}
-        scrolling="no"
-        allowTransparency
-        frameBorder="0"
-        height="600"
-        title="Vídeo Instagram MD Fábrica"
-      />
+      <a
+        href={INSTAGRAM_POST}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block mx-auto mb-12 max-w-[540px] relative group rounded-lg overflow-hidden"
+      >
+        <img
+          src={instagramThumb}
+          alt="Vídeo MD Fábrica no Instagram"
+          className="w-full rounded-lg"
+        />
+        <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition-colors">
+          <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center">
+            <Play className="w-7 h-7 text-primary-foreground fill-primary-foreground ml-1" />
+          </div>
+        </div>
+        <span className="absolute bottom-3 left-1/2 -translate-x-1/2 text-xs text-white/80 font-bold uppercase tracking-wide">
+          Assistir no Instagram
+        </span>
+      </a>
 
       <div className="grid md:grid-cols-3 gap-6">
         {services.map((s) => (
