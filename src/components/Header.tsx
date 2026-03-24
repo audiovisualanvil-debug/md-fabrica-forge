@@ -18,14 +18,9 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur border-b border-border">
       <div className="container mx-auto flex items-center justify-between py-3 px-4">
-        <div className="flex flex-col">
-          <span className="font-heading text-2xl md:text-3xl font-black tracking-tight text-foreground leading-none">
-            MD <span className="text-primary">FÁBRICA</span>
-          </span>
-          <span className="text-[10px] md:text-xs text-muted-foreground tracking-widest uppercase">
-            Peças para Máquinas Pesadas
-          </span>
-        </div>
+        <a href="#inicio" className="flex items-center gap-3">
+          <img src={logoMd} alt="MD Fábrica" className="h-10 md:h-12 brightness-0 invert" />
+        </a>
 
         <nav className="hidden lg:flex items-center gap-8">
           {navItems.map((item) => (
