@@ -45,6 +45,15 @@ const ProductsSection = ({ brandFilter, onClearFilter }: ProductsSectionProps) =
     }
   }, [brandFilter]);
 
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const query = (e as CustomEvent).detail;
+      if (query) setSearch(query);
+    };
+    window.addEventListener("hero-search", handler);
+    return () => window.removeEventListener("hero-search", handler);
+  }, []);
+
   const filtered = products.filter((p) => {
     const matchesBrand = brandFilter ? p.brand === brandFilter : true;
     const matchesSearch = search
