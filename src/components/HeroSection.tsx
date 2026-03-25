@@ -25,16 +25,16 @@ const catalogCards = [
   { image: imgSemiEixo, name: "Semi-Eixo", code: "Cód: 144461A1", tag: null },
 ];
 
-// Card positions: [translateX%, translateY%, rotate°, scale, zIndex]
+// Card positions: [left, top, rotate°, scale, zIndex] — using viewport-aware values
 const leftPositions = [
-  ["-58%", "10%", -12, 0.88, 1],
-  ["-40%", "-20%", -6, 0.82, 2],
-  ["-22%", "30%", -3, 0.78, 3],
+  ["-2%", "5%", -14, 0.95, 1],
+  ["4%", "48%", -8, 0.88, 2],
+  ["12%", "18%", -4, 0.8, 3],
 ];
 const rightPositions = [
-  ["58%", "5%", 11, 0.88, 1],
-  ["40%", "-25%", 5, 0.82, 2],
-  ["22%", "28%", 2, 0.78, 3],
+  ["80%", "3%", 13, 0.95, 1],
+  ["72%", "46%", 7, 0.88, 2],
+  ["64%", "16%", 3, 0.8, 3],
 ];
 
 const CatalogCard = ({
@@ -130,9 +130,9 @@ const HeroSection = () => {
                   card={card}
                   className="animate-fade-up opacity-0"
                   style={{
-                    left: "50%",
-                    top: "50%",
-                    transform: `translate(${leftPositions[i][0]}, ${leftPositions[i][1]}) rotate(${leftPositions[i][2]}deg) scale(${leftPositions[i][3]})`,
+                    left: leftPositions[i][0] as string,
+                    top: leftPositions[i][1] as string,
+                    transform: `rotate(${leftPositions[i][2]}deg) scale(${leftPositions[i][3]})`,
                     zIndex: leftPositions[i][4] as number,
                     animationDelay: `${400 + i * 150}ms`,
                   }}
@@ -144,9 +144,9 @@ const HeroSection = () => {
                   card={card}
                   className="animate-fade-up opacity-0"
                   style={{
-                    left: "50%",
-                    top: "50%",
-                    transform: `translate(${rightPositions[i][0]}, ${rightPositions[i][1]}) rotate(${rightPositions[i][2]}deg) scale(${rightPositions[i][3]})`,
+                    left: rightPositions[i][0] as string,
+                    top: rightPositions[i][1] as string,
+                    transform: `rotate(${rightPositions[i][2]}deg) scale(${rightPositions[i][3]})`,
                     zIndex: rightPositions[i][4] as number,
                     animationDelay: `${500 + i * 150}ms`,
                   }}
