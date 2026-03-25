@@ -15,7 +15,7 @@ const WhatsAppFloat = () => {
   }, [open]);
 
   return (
-    <div ref={ref} className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+    <div ref={ref} className="fixed bottom-20 md:bottom-6 right-4 md:right-6 z-50 flex flex-col items-end">
       {open && (
         <div
           className="mb-3 w-[280px] rounded-lg overflow-hidden animate-in slide-in-from-bottom-4 fade-in duration-200"
@@ -35,7 +35,7 @@ const WhatsAppFloat = () => {
 
           <div className="p-3 flex flex-col gap-2">
             <a
-              href="https://wa.me/5551997859061?text=Olá,+vim+pelo+site+e+gostaria+de+atendimento"
+              href="https://wa.me/5551997859061?text=Olá!+Quero+cotar+uma+peça.+Pode+confirmar+compatibilidade+e+prazo?"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 rounded-md p-3 border border-transparent transition-colors hover:border-[#CC1414] cursor-pointer"
