@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { MessageCircle, Settings, Search } from "lucide-react";
 import product2105946 from "@/assets/product-2105946.png";
+import product2105934 from "@/assets/product-2105934.png";
 
 const products = [
-  { name: "ENGRENAGEM", brand: "CATERPILLAR", code: "2105934", image: null },
+  { name: "ENGRENAGEM", brand: "CATERPILLAR", code: "2105934", image: product2105934 },
   { name: "SEMI-EIXO", brand: "CATERPILLAR", code: "2105946", image: product2105946 },
   { name: "SEMI-EIXO", brand: "JCB", code: "914/60109", image: null },
   { name: "CUBO", brand: "JCB", code: "458/20501", image: null },
