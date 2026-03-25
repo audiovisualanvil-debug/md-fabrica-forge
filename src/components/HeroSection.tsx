@@ -130,9 +130,9 @@ const HeroSection = () => {
                   card={card}
                   className="animate-fade-up opacity-0"
                   style={{
-                    left: "50%",
-                    top: "50%",
-                    transform: `translate(${leftPositions[i][0]}, ${leftPositions[i][1]}) rotate(${leftPositions[i][2]}deg) scale(${leftPositions[i][3]})`,
+                    left: leftPositions[i][0] as string,
+                    top: leftPositions[i][1] as string,
+                    transform: `rotate(${leftPositions[i][2]}deg) scale(${leftPositions[i][3]})`,
                     zIndex: leftPositions[i][4] as number,
                     animationDelay: `${400 + i * 150}ms`,
                   }}
@@ -144,9 +144,9 @@ const HeroSection = () => {
                   card={card}
                   className="animate-fade-up opacity-0"
                   style={{
-                    left: "50%",
-                    top: "50%",
-                    transform: `translate(${rightPositions[i][0]}, ${rightPositions[i][1]}) rotate(${rightPositions[i][2]}deg) scale(${rightPositions[i][3]})`,
+                    left: rightPositions[i][0] as string,
+                    top: rightPositions[i][1] as string,
+                    transform: `rotate(${rightPositions[i][2]}deg) scale(${rightPositions[i][3]})`,
                     zIndex: rightPositions[i][4] as number,
                     animationDelay: `${500 + i * 150}ms`,
                   }}
