@@ -25,16 +25,16 @@ const catalogCards = [
   { image: imgSemiEixo, name: "Semi-Eixo", code: "Cód: 144461A1", tag: null },
 ];
 
-// Card positions: [translateX%, translateY%, rotate°, scale, zIndex]
+// Card positions: [left, top, rotate°, scale, zIndex] — using viewport-aware values
 const leftPositions = [
-  ["-58%", "10%", -12, 0.88, 1],
-  ["-40%", "-20%", -6, 0.82, 2],
-  ["-22%", "30%", -3, 0.78, 3],
+  ["2%", "12%", -14, 0.92, 1],
+  ["10%", "55%", -7, 0.85, 2],
+  ["18%", "20%", -4, 0.8, 3],
 ];
 const rightPositions = [
-  ["58%", "5%", 11, 0.88, 1],
-  ["40%", "-25%", 5, 0.82, 2],
-  ["22%", "28%", 2, 0.78, 3],
+  ["72%", "10%", 12, 0.92, 1],
+  ["64%", "55%", 6, 0.85, 2],
+  ["56%", "22%", 3, 0.8, 3],
 ];
 
 const CatalogCard = ({
