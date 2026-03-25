@@ -47,30 +47,32 @@ const CatalogCard = ({
   className?: string;
 }) => (
   <div
-    className={`absolute rounded-xl overflow-hidden border border-border/60 shadow-2xl shadow-black/60 pointer-events-auto select-none transition-all duration-500 ease-out hover:scale-105 hover:shadow-[0_20px_60px_-10px_hsl(var(--primary)/0.3)] hover:border-primary/40 hover:z-50 ${className}`}
+    className={`absolute ${className}`}
     style={{
       width: "200px",
       ...style,
     }}
   >
-    <div className="relative aspect-[3/4] bg-card">
-      <img
-        src={card.image}
-        alt={card.name}
-        className="w-full h-full object-cover opacity-80"
-        loading="lazy"
-        width={200}
-        height={267}
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-      {card.tag && (
-        <span className="absolute top-2 left-2 bg-primary/90 text-primary-foreground text-[9px] font-heading font-bold uppercase tracking-wider px-2 py-0.5 rounded">
-          {card.tag}
-        </span>
-      )}
-      <div className="absolute bottom-0 left-0 right-0 p-3">
-        <p className="text-foreground font-heading font-bold text-sm uppercase leading-tight">{card.name}</p>
-        <p className="text-muted-foreground text-[10px] font-heading uppercase tracking-wider mt-0.5">{card.code}</p>
+    <div className="rounded-xl overflow-hidden border border-border/60 shadow-2xl shadow-black/60 select-none transition-all duration-500 ease-out hover:scale-105 hover:shadow-[0_20px_60px_-10px_hsl(var(--primary)/0.3)] hover:border-primary/40 hover:z-50 pointer-events-auto">
+      <div className="relative aspect-[3/4] bg-card">
+        <img
+          src={card.image}
+          alt={card.name}
+          className="w-full h-full object-cover opacity-80"
+          loading="lazy"
+          width={200}
+          height={267}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+        {card.tag && (
+          <span className="absolute top-2 left-2 bg-primary/90 text-primary-foreground text-[9px] font-heading font-bold uppercase tracking-wider px-2 py-0.5 rounded">
+            {card.tag}
+          </span>
+        )}
+        <div className="absolute bottom-0 left-0 right-0 p-3">
+          <p className="text-foreground font-heading font-bold text-sm uppercase leading-tight">{card.name}</p>
+          <p className="text-muted-foreground text-[10px] font-heading uppercase tracking-wider mt-0.5">{card.code}</p>
+        </div>
       </div>
     </div>
   </div>
