@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef } from "react";
 import { Search, MessageCircle, Factory, Zap, Cog, Truck } from "lucide-react";
 import imgRedutor from "@/assets/catalog/redutor.jpg";
 import imgRodaGuia from "@/assets/catalog/roda-guia.jpg";
@@ -27,25 +27,15 @@ const catalogCards = [
 
 // Card positions: [left, top, rotate°, scale, zIndex] — using viewport-aware values
 const leftPositions = [
-  ["-10%", "5%", -14, 0.92, 1],
-  ["-5%", "50%", -8, 0.85, 2],
-  ["4%", "20%", -4, 0.78, 3],
+  ["-2%", "5%", -14, 0.95, 1],
+  ["4%", "48%", -8, 0.88, 2],
+  ["12%", "18%", -4, 0.8, 3],
 ];
 const rightPositions = [
-  ["88%", "3%", 13, 0.92, 1],
-  ["82%", "48%", 7, 0.85, 2],
-  ["74%", "18%", 3, 0.78, 3],
+  ["80%", "3%", 13, 0.95, 1],
+  ["72%", "46%", 7, 0.88, 2],
+  ["64%", "16%", 3, 0.8, 3],
 ];
-
-const handleCardClick = (cardName: string) => {
-  const section = document.getElementById("produtos");
-  if (section) {
-    section.scrollIntoView({ behavior: "smooth" });
-    setTimeout(() => {
-      window.dispatchEvent(new CustomEvent("hero-search", { detail: cardName }));
-    }, 600);
-  }
-};
 
 const CatalogCard = ({
   card,
@@ -57,38 +47,32 @@ const CatalogCard = ({
   className?: string;
 }) => (
   <div
-    className={`absolute ${className}`}
+    className={`absolute rounded-xl overflow-hidden border border-border/60 shadow-2xl shadow-black/60 pointer-events-none select-none ${className}`}
     style={{
       width: "200px",
       ...style,
     }}
   >
-    <button
-      type="button"
-      onClick={() => handleCardClick(card.name)}
-      className="rounded-xl overflow-hidden border border-border/60 shadow-2xl shadow-black/60 select-none transition-all duration-500 ease-out hover:scale-105 hover:shadow-[0_20px_60px_-10px_hsl(var(--primary)/0.3)] hover:border-primary/40 hover:z-50 pointer-events-auto cursor-pointer text-left w-full"
-    >
-      <div className="relative aspect-[3/4] bg-card">
-        <img
-          src={card.image}
-          alt={card.name}
-          className="w-full h-full object-cover opacity-80"
-          loading="lazy"
-          width={200}
-          height={267}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-        {card.tag && (
-          <span className="absolute top-2 left-2 bg-primary/90 text-primary-foreground text-[9px] font-heading font-bold uppercase tracking-wider px-2 py-0.5 rounded">
-            {card.tag}
-          </span>
-        )}
-        <div className="absolute bottom-0 left-0 right-0 p-3">
-          <p className="text-foreground font-heading font-bold text-sm uppercase leading-tight">{card.name}</p>
-          <p className="text-muted-foreground text-[10px] font-heading uppercase tracking-wider mt-0.5">{card.code}</p>
-        </div>
+    <div className="relative aspect-[3/4] bg-card">
+      <img
+        src={card.image}
+        alt={card.name}
+        className="w-full h-full object-cover opacity-80"
+        loading="lazy"
+        width={200}
+        height={267}
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+      {card.tag && (
+        <span className="absolute top-2 left-2 bg-primary/90 text-primary-foreground text-[9px] font-heading font-bold uppercase tracking-wider px-2 py-0.5 rounded">
+          {card.tag}
+        </span>
+      )}
+      <div className="absolute bottom-0 left-0 right-0 p-3">
+        <p className="text-foreground font-heading font-bold text-sm uppercase leading-tight">{card.name}</p>
+        <p className="text-muted-foreground text-[10px] font-heading uppercase tracking-wider mt-0.5">{card.code}</p>
       </div>
-    </button>
+    </div>
   </div>
 );
 
@@ -96,22 +80,6 @@ const HeroSection = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  const sectionRef = useRef<HTMLElement>(null);
-  const [scrollY, setScrollY] = useState(0);
-
-  const handleScroll = useCallback(() => {
-    if (sectionRef.current) {
-      const rect = sectionRef.current.getBoundingClientRect();
-      if (rect.bottom > 0) {
-        setScrollY(window.scrollY);
-      }
-    }
-  }, []);
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [handleScroll]);
 
   const handleSearch = () => {
     if (!searchTerm.trim()) {
@@ -137,7 +105,6 @@ const HeroSection = () => {
   return (
     <>
       <section
-        ref={sectionRef}
         id="inicio"
         className="relative min-h-[auto] lg:min-h-[88vh] flex items-center overflow-hidden"
       >
@@ -157,42 +124,34 @@ const HeroSection = () => {
           {/* Floating catalog cards — desktop only */}
           <div className="hidden lg:block absolute inset-0 pointer-events-none" aria-hidden="true">
             <div className="relative w-full h-full flex items-center justify-center">
-              {leftCards.map((card, i) => {
-                const speed = [0.08, 0.12, 0.06][i];
-                const parallaxY = scrollY * speed;
-                return (
-                  <CatalogCard
-                    key={card.name}
-                    card={card}
-                    className="animate-fade-up opacity-0 transition-none"
-                    style={{
-                      left: leftPositions[i][0] as string,
-                      top: leftPositions[i][1] as string,
-                      transform: `rotate(${leftPositions[i][2]}deg) scale(${leftPositions[i][3]}) translateY(${parallaxY}px)`,
-                      zIndex: leftPositions[i][4] as number,
-                      animationDelay: `${400 + i * 150}ms`,
-                    }}
-                  />
-                );
-              })}
-              {rightCards.map((card, i) => {
-                const speed = [0.1, 0.05, 0.14][i];
-                const parallaxY = scrollY * speed;
-                return (
-                  <CatalogCard
-                    key={card.name}
-                    card={card}
-                    className="animate-fade-up opacity-0 transition-none"
-                    style={{
-                      left: rightPositions[i][0] as string,
-                      top: rightPositions[i][1] as string,
-                      transform: `rotate(${rightPositions[i][2]}deg) scale(${rightPositions[i][3]}) translateY(${parallaxY}px)`,
-                      zIndex: rightPositions[i][4] as number,
-                      animationDelay: `${500 + i * 150}ms`,
-                    }}
-                  />
-                );
-              })}
+              {leftCards.map((card, i) => (
+                <CatalogCard
+                  key={card.name}
+                  card={card}
+                  className="animate-fade-up opacity-0"
+                  style={{
+                    left: leftPositions[i][0] as string,
+                    top: leftPositions[i][1] as string,
+                    transform: `rotate(${leftPositions[i][2]}deg) scale(${leftPositions[i][3]})`,
+                    zIndex: leftPositions[i][4] as number,
+                    animationDelay: `${400 + i * 150}ms`,
+                  }}
+                />
+              ))}
+              {rightCards.map((card, i) => (
+                <CatalogCard
+                  key={card.name}
+                  card={card}
+                  className="animate-fade-up opacity-0"
+                  style={{
+                    left: rightPositions[i][0] as string,
+                    top: rightPositions[i][1] as string,
+                    transform: `rotate(${rightPositions[i][2]}deg) scale(${rightPositions[i][3]})`,
+                    zIndex: rightPositions[i][4] as number,
+                    animationDelay: `${500 + i * 150}ms`,
+                  }}
+                />
+              ))}
             </div>
           </div>
 
@@ -269,19 +228,9 @@ const HeroSection = () => {
               </p>
               <div className="flex gap-3 overflow-x-auto pb-4 -mx-4 px-4 snap-x snap-mandatory scrollbar-hide">
                 {catalogCards.map((card) => (
-                  <button
+                  <div
                     key={card.name}
-                    type="button"
-                    onClick={() => {
-                      const section = document.getElementById("produtos");
-                      if (section) {
-                        section.scrollIntoView({ behavior: "smooth" });
-                        setTimeout(() => {
-                          window.dispatchEvent(new CustomEvent("hero-search", { detail: card.name }));
-                        }, 600);
-                      }
-                    }}
-                    className="snap-start shrink-0 w-[42vw] max-w-[180px] rounded-lg overflow-hidden border border-border/60 bg-card shadow-lg text-left active:scale-[0.97] transition-transform"
+                    className="snap-start shrink-0 w-[42vw] max-w-[180px] rounded-lg overflow-hidden border border-border/60 bg-card shadow-lg"
                   >
                     <div className="relative aspect-[3/4]">
                       <img
@@ -303,7 +252,7 @@ const HeroSection = () => {
                         <p className="text-foreground/50 text-[10px] font-heading uppercase tracking-wider mt-0.5">{card.code}</p>
                       </div>
                     </div>
-                  </button>
+                  </div>
                 ))}
               </div>
             </div>
