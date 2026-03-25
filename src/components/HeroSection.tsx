@@ -228,9 +228,19 @@ const HeroSection = () => {
               </p>
               <div className="flex gap-3 overflow-x-auto pb-4 -mx-4 px-4 snap-x snap-mandatory scrollbar-hide">
                 {catalogCards.map((card) => (
-                  <div
+                  <button
                     key={card.name}
-                    className="snap-start shrink-0 w-[42vw] max-w-[180px] rounded-lg overflow-hidden border border-border/60 bg-card shadow-lg"
+                    type="button"
+                    onClick={() => {
+                      const section = document.getElementById("produtos");
+                      if (section) {
+                        section.scrollIntoView({ behavior: "smooth" });
+                        setTimeout(() => {
+                          window.dispatchEvent(new CustomEvent("hero-search", { detail: card.name }));
+                        }, 600);
+                      }
+                    }}
+                    className="snap-start shrink-0 w-[42vw] max-w-[180px] rounded-lg overflow-hidden border border-border/60 bg-card shadow-lg text-left active:scale-[0.97] transition-transform"
                   >
                     <div className="relative aspect-[3/4]">
                       <img
@@ -252,7 +262,7 @@ const HeroSection = () => {
                         <p className="text-foreground/50 text-[10px] font-heading uppercase tracking-wider mt-0.5">{card.code}</p>
                       </div>
                     </div>
-                  </div>
+                  </button>
                 ))}
               </div>
             </div>
