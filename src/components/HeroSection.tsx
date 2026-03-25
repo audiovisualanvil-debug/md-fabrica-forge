@@ -37,6 +37,16 @@ const rightPositions = [
   ["74%", "18%", 3, 0.78, 3],
 ];
 
+const handleCardClick = (cardName: string) => {
+  const section = document.getElementById("produtos");
+  if (section) {
+    section.scrollIntoView({ behavior: "smooth" });
+    setTimeout(() => {
+      window.dispatchEvent(new CustomEvent("hero-search", { detail: cardName }));
+    }, 600);
+  }
+};
+
 const CatalogCard = ({
   card,
   style,
@@ -53,7 +63,11 @@ const CatalogCard = ({
       ...style,
     }}
   >
-    <div className="rounded-xl overflow-hidden border border-border/60 shadow-2xl shadow-black/60 select-none transition-all duration-500 ease-out hover:scale-105 hover:shadow-[0_20px_60px_-10px_hsl(var(--primary)/0.3)] hover:border-primary/40 hover:z-50 pointer-events-auto">
+    <button
+      type="button"
+      onClick={() => handleCardClick(card.name)}
+      className="rounded-xl overflow-hidden border border-border/60 shadow-2xl shadow-black/60 select-none transition-all duration-500 ease-out hover:scale-105 hover:shadow-[0_20px_60px_-10px_hsl(var(--primary)/0.3)] hover:border-primary/40 hover:z-50 pointer-events-auto cursor-pointer text-left w-full"
+    >
       <div className="relative aspect-[3/4] bg-card">
         <img
           src={card.image}
@@ -74,7 +88,7 @@ const CatalogCard = ({
           <p className="text-muted-foreground text-[10px] font-heading uppercase tracking-wider mt-0.5">{card.code}</p>
         </div>
       </div>
-    </div>
+    </button>
   </div>
 );
 
