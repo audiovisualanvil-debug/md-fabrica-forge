@@ -153,12 +153,13 @@ const ProductsSection = ({ brandFilter, onClearFilter }: ProductsSectionProps) =
 
         <div className="text-center mt-10">
           <a
-            href="https://www.mdfabrica.com.br/produtos"
+            href="https://wa.me/5551997859061?text=Olá,+gostaria+de+consultar+uma+peça+que+não+encontrei+no+site"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 border border-foreground/30 text-foreground px-8 py-3.5 rounded font-heading font-bold uppercase tracking-wide hover:border-primary hover:text-primary transition"
           >
-            Ver Catálogo Completo
+            <MessageCircle className="w-4 h-4" />
+            Não encontrou? Consulte pelo WhatsApp
           </a>
         </div>
       </div>

@@ -38,14 +38,12 @@ const HeroSection = () => (
             <MessageCircle className="w-5 h-5" />
             Falar no WhatsApp
           </a>
-          <a
-            href="https://www.mdfabrica.com.br/produtos"
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={() => document.getElementById("produtos")?.scrollIntoView({ behavior: "smooth" })}
             className="inline-flex items-center gap-2 border border-foreground/30 text-foreground px-6 py-3.5 rounded font-heading font-bold uppercase tracking-wide hover:border-primary hover:text-primary transition"
           >
             Ver Catálogo <ArrowRight className="w-4 h-4" />
-          </a>
+          </button>
         </div>
         <div className="flex items-center gap-2 mt-4">
           <Clock className="w-4 h-4 text-muted-foreground" />
