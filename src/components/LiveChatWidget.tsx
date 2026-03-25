@@ -1,74 +1,83 @@
-import { useState } from "react";
-import { MessageSquare, X } from "lucide-react";
-
-const attendants = [
-  {
-    initials: "MD",
-    name: "Atendimento MD Fábrica",
-    role: "Atendimento Comercial",
-    whatsapp: "https://wa.me/5551997859061?text=Olá,+gostaria+de+falar+com+o+atendimento+comercial",
-  },
-  {
-    initials: "ST",
-    name: "Suporte MD Fábrica",
-    role: "Suporte Técnico",
-    whatsapp: "https://wa.me/5551997859061?text=Olá,+preciso+de+suporte+técnico",
-  },
-];
+import { useState, useEffect, useRef } from "react";
+import { MessageSquare, X, Wrench } from "lucide-react";
 
 const LiveChatWidget = () => {
   const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [open]);
 
   return (
-    <div className="fixed bottom-6 left-6 z-50 flex flex-col items-start gap-3">
+    <div ref={ref} className="fixed bottom-6 left-6 z-50 flex flex-col items-start">
       {open && (
         <div
-          className="mb-2 w-80 rounded-xl overflow-hidden shadow-2xl animate-in slide-in-from-bottom-4 fade-in duration-300"
-          style={{ backgroundColor: "#141414", border: "2px solid #CC1414" }}
+          className="mb-3 w-[280px] rounded-lg overflow-hidden animate-in slide-in-from-bottom-4 fade-in duration-200"
+          style={{
+            backgroundColor: "#141414",
+            border: "1px solid #CC1414",
+            boxShadow: "0 8px 32px rgba(0,0,0,0.6)",
+          }}
         >
           {/* Header */}
-          <div className="flex items-center justify-between px-5 py-4" style={{ backgroundColor: "#1a1a1a" }}>
-            <div className="flex items-center gap-2">
-              <span className="inline-block w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse" />
-              <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-green-400">Online Agora</span>
-                <p className="text-sm font-heading font-bold text-foreground mt-0.5">Fale com a gente</p>
-              </div>
-            </div>
-            <button
-              onClick={() => setOpen(false)}
-              className="text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <X className="w-5 h-5" />
-            </button>
+          <div className="px-4 py-3" style={{ backgroundColor: "#CC1414" }}>
+            <p className="text-white font-bold text-sm uppercase tracking-wide">Fale com a gente</p>
+            <span className="flex items-center gap-1.5 mt-0.5">
+              <span className="inline-block w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+              <span className="text-[11px] text-white/80">Online agora</span>
+            </span>
           </div>
 
           {/* Attendants */}
-          <div className="p-4 flex flex-col gap-3">
-            {attendants.map((a) => (
-              <a
-                key={a.role}
-                href={a.whatsapp}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 rounded-lg p-3 transition-colors hover:bg-white/5"
-                style={{ backgroundColor: "#1a1a1a" }}
+          <div className="p-3 flex flex-col gap-2">
+            <a
+              href="https://wa.me/5551997859061?text=Olá,+vim+pelo+site+e+gostaria+de+atendimento"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 rounded-md p-3 border border-transparent transition-colors hover:border-[#CC1414] cursor-pointer"
+              style={{ backgroundColor: "#1c1c1c" }}
+            >
+              <div
+                className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-xs shrink-0"
+                style={{ backgroundColor: "#CC1414" }}
               >
-                <div className="w-11 h-11 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-heading font-black text-sm shrink-0">
-                  {a.initials}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-bold text-foreground truncate">{a.name}</p>
-                  <p className="text-xs text-muted-foreground">{a.role}</p>
-                </div>
-                <MessageSquare className="w-4 h-4 text-primary shrink-0" />
-              </a>
-            ))}
+                MD
+              </div>
+              <div className="min-w-0">
+                <p className="text-sm font-bold text-white truncate">MD Fábrica</p>
+                <p className="text-xs text-gray-400">Atendimento Comercial</p>
+              </div>
+            </a>
+
+            <a
+              href="https://wa.me/5551997859061?text=Olá,+preciso+de+suporte+técnico+sobre+uma+peça"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 rounded-md p-3 border border-transparent transition-colors hover:border-[#CC1414] cursor-pointer"
+              style={{ backgroundColor: "#1c1c1c" }}
+            >
+              <div
+                className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
+                style={{ backgroundColor: "#333" }}
+              >
+                <Wrench className="w-4 h-4 text-white" />
+              </div>
+              <div className="min-w-0">
+                <p className="text-sm font-bold text-white truncate">Suporte Técnico</p>
+                <p className="text-xs text-gray-400">Dúvidas sobre peças</p>
+              </div>
+            </a>
           </div>
 
           {/* Footer */}
-          <div className="px-5 py-3 text-center border-t" style={{ borderColor: "#2a2a2a" }}>
-            <span className="text-xs text-muted-foreground">Seg–Sex · 7h às 18h</span>
+          <div className="px-4 py-2 text-center" style={{ borderTop: "1px solid #2a2a2a" }}>
+            <span className="text-[11px] text-gray-500">Seg–Sex · 7h às 18h</span>
           </div>
         </div>
       )}
@@ -76,21 +85,25 @@ const LiveChatWidget = () => {
       {/* Float button */}
       <button
         onClick={() => setOpen(!open)}
-        className="group flex items-center gap-3 rounded-full px-5 py-3 shadow-lg transition-all duration-300 hover:scale-105"
-        style={{ backgroundColor: "#CC1414" }}
+        className="relative flex items-center justify-center rounded-full transition-transform duration-200 hover:scale-105"
+        style={{
+          width: 58,
+          height: 58,
+          backgroundColor: "#25D366",
+          boxShadow: "0 4px 20px rgba(37,211,102,0.4)",
+        }}
       >
         {open ? (
-          <X className="w-5 h-5 text-white" />
+          <X className="w-6 h-6 text-white" />
         ) : (
-          <MessageSquare className="w-5 h-5 text-white" />
+          <MessageSquare className="w-6 h-6 text-white" />
         )}
-        <span className="text-white font-heading font-bold text-sm uppercase tracking-wide">
-          Fale com a gente
-        </span>
-        <span className="flex items-center gap-1.5">
-          <span className="inline-block w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-          <span className="text-[10px] text-green-300 font-semibold uppercase">Online</span>
-        </span>
+        {!open && (
+          <span className="absolute -top-1 -right-1 flex items-center gap-1 bg-green-600 rounded-full px-1.5 py-0.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-green-300 animate-pulse" />
+            <span className="text-[8px] text-white font-bold uppercase">Online</span>
+          </span>
+        )}
       </button>
     </div>
   );
