@@ -7,7 +7,7 @@ import imgLinhaGiro from "@/assets/catalog/linha-giro.jpg";
 import imgEngrenagem from "@/assets/catalog/engrenagem.jpg";
 import imgSemiEixo from "@/assets/catalog/semi-eixo.jpg";
 
-const WA_LINK = "https://wa.me/5551997859061?text=Olá,+vim+pelo+site+e+gostaria+de+um+orçamento";
+const WA_LINK = "https://wa.me/5551997859061?text=Olá!+Quero+cotar+uma+peça.+Pode+confirmar+compatibilidade+e+prazo?";
 
 const trustItems = [
   { icon: Factory, label: "Fabricação própria" },
@@ -195,6 +195,17 @@ const HeroSection = () => {
                   Buscar peça
                 </button>
               </div>
+              <p className="text-[11px] text-muted-foreground mt-2 text-center animate-fade-up [animation-delay:250ms] opacity-0">
+                Não tem o código?{" "}
+                <a
+                  href="https://wa.me/5551997859061?text=Olá!+Quero+enviar+a+foto+de+uma+peça+para+identificação.+Pode+me+ajudar?"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-whatsapp hover:underline font-bold"
+                >
+                  Envie uma foto no WhatsApp
+                </a>
+              </p>
             </div>
 
             {/* WhatsApp */}

@@ -1,6 +1,6 @@
 import { MessageCircle } from "lucide-react";
 
-const WA_LINK = "https://wa.me/5551997859061?text=Olá,+vim+pelo+site+e+gostaria+de+um+orçamento";
+const WA_LINK = "https://wa.me/5551997859061?text=Olá!+Quero+cotar+uma+peça.+Pode+confirmar+compatibilidade+e+prazo?";
 
 const MobileCTA = () => (
   <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-primary border-t border-primary/80 px-4 py-3 safe-area-bottom">
