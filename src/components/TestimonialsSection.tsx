@@ -22,13 +22,13 @@ const testimonials = [
 ];
 
 const TestimonialsSection = () => (
-  <section className="section-padding bg-card">
+  <section className="py-14 md:py-20 px-4 md:px-8 bg-card">
     <div className="container mx-auto">
       <div className="text-center mb-12">
         <span className="text-xs uppercase tracking-[0.3em] text-primary font-bold">
           Depoimentos
         </span>
-        <h2 className="font-heading text-3xl md:text-4xl font-black uppercase mt-3 text-foreground">
+        <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-black uppercase mt-3 text-foreground">
           O que Dizem Nossos Clientes
         </h2>
       </div>

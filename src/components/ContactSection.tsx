@@ -10,7 +10,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contato" className="section-padding bg-card">
+    <section id="contato" className="py-16 md:py-20 px-4 md:px-8 bg-card">
       <div className="container mx-auto">
         <div className="text-center mb-12">
           <span className="text-xs uppercase tracking-[0.3em] text-primary font-bold">
@@ -90,7 +90,7 @@ const ContactSection = () => {
         <div className="mt-10">
           <iframe
             title="Localização MD Fábrica"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3454.5!2d-51.1812!3d-29.9167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sRua+Quara%C3%AD%2C+38+-+Niter%C3%B3i%2C+Canoas+-+RS%2C+92130-420!5e0!3m2!1spt-BR!2sbr!4v1700000000000"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3457.2!2d-51.1812!3d-29.9167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95197050d11da3bb%3A0x4f6e5f1b4e3a2c8d!2sRua+Quara%C3%AD%2C+38+-+Niter%C3%B3i%2C+Canoas+-+RS%2C+92120-420!5e0!3m2!1spt-BR!2sbr!4v1700000000000"
             width="100%"
             height="300"
             style={{ border: 0, borderRadius: "4px" }}

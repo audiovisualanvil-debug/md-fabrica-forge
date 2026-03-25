@@ -1,3 +1,4 @@
+import { Instagram, Phone, Mail } from "lucide-react";
 import logoMd from "@/assets/logo-md.png";
 
 const Footer = () => (
@@ -9,6 +10,31 @@ const Footer = () => (
           Fabricação e comércio de peças para máquinas pesadas. 22 anos de
           tradição no polo metalmecânico de Canoas/RS.
         </p>
+        <div className="flex items-center gap-3 mt-4">
+          <a
+            href="https://www.instagram.com/mdfabrica/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors"
+            aria-label="Instagram"
+          >
+            <Instagram className="w-5 h-5" />
+          </a>
+          <a
+            href="tel:+555134283012"
+            className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors"
+            aria-label="Telefone"
+          >
+            <Phone className="w-5 h-5" />
+          </a>
+          <a
+            href="mailto:comercial@mdfabrica.com.br"
+            className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors"
+            aria-label="Email"
+          >
+            <Mail className="w-5 h-5" />
+          </a>
+        </div>
       </div>
 
       <div>
