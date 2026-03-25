@@ -1,5 +1,5 @@
 import { useState, FormEvent } from "react";
-import { MapPin, Phone, MessageCircle, Mail, Clock } from "lucide-react";
+import { MapPin, Phone, MessageCircle, Mail, Clock, Zap } from "lucide-react";
 
 const ContactSection = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -39,48 +39,52 @@ const ContactSection = () => {
             ))}
           </div>
 
-          {submitted ? (
-            <div className="bg-background border border-border rounded-lg p-8 flex items-center justify-center">
-              <p className="text-foreground font-heading text-xl font-bold uppercase text-center">
-                ✅ Mensagem enviada!<br />
-                <span className="text-sm font-normal text-muted-foreground normal-case">
-                  Retornaremos em breve.
-                </span>
-              </p>
+          <div className="bg-background border border-border rounded-lg p-6 md:p-8">
+            <div className="flex items-center gap-2 mb-2">
+              <Zap className="w-5 h-5 text-primary" />
+              <span className="text-primary font-heading font-bold text-sm uppercase tracking-wide">
+                Exclusivo
+              </span>
             </div>
-          ) : (
-            <form
-              onSubmit={handleSubmit}
-              className="bg-background border border-border rounded-lg p-6 space-y-4"
-            >
-              {[
-                { name: "nome", placeholder: "Seu nome", type: "text" },
-                { name: "empresa", placeholder: "Empresa", type: "text" },
-                { name: "telefone", placeholder: "Telefone", type: "tel" },
-                { name: "marca", placeholder: "Marca da máquina", type: "text" },
-              ].map((f) => (
+            <h3 className="font-heading text-xl md:text-2xl font-black text-foreground mb-2">
+              Peças que saem antes de chegar ao site.
+            </h3>
+            <p className="text-muted-foreground text-sm mb-6">
+              Cadastre-se e seja o primeiro a saber.
+            </p>
+
+            {submitted ? (
+              <div className="py-6 text-center">
+                <p className="text-foreground font-heading text-xl font-bold uppercase">
+                  ✅ Cadastro recebido!
+                </p>
+                <span className="text-sm text-muted-foreground">
+                  Você será avisado em primeira mão.
+                </span>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-3">
                 <input
-                  key={f.name}
-                  type={f.type}
-                  placeholder={f.placeholder}
+                  type="text"
+                  placeholder="Seu nome"
                   required
                   className="w-full bg-secondary border border-border rounded px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
                 />
-              ))}
-              <textarea
-                placeholder="Mensagem"
-                rows={4}
-                required
-                className="w-full bg-secondary border border-border rounded px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors resize-none"
-              />
-              <button
-                type="submit"
-                className="w-full bg-primary text-primary-foreground py-3 rounded font-heading font-bold uppercase tracking-wide hover:bg-primary/90 transition-colors"
-              >
-                Enviar
-              </button>
-            </form>
-          )}
+                <input
+                  type="tel"
+                  placeholder="Seu WhatsApp"
+                  required
+                  className="w-full bg-secondary border border-border rounded px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
+                />
+                <button
+                  type="submit"
+                  className="w-full bg-primary text-primary-foreground py-3 rounded font-heading font-bold uppercase tracking-wide hover:bg-primary/90 transition-colors"
+                >
+                  Quero ser avisado
+                </button>
+              </form>
+            )}
+          </div>
         </div>
 
         <div className="mt-10">
