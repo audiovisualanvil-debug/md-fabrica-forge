@@ -1,88 +1,127 @@
-import { MessageCircle, ArrowRight, Truck, Clock, ChevronDown } from "lucide-react";
+import { useState } from "react";
+import { Search, MessageCircle, Factory, Zap, Cog, Truck } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const WA_LINK = "https://wa.me/5551997859061?text=Olá,+vim+pelo+site+e+gostaria+de+um+orçamento";
 
-const HeroSection = () => (
-  <section
-    id="inicio"
-    className="relative min-h-[90vh] flex items-center overflow-hidden"
-  >
-    <div
-      className="absolute inset-0 bg-cover bg-center"
-      style={{ backgroundImage: `url(${heroBg})` }}
-    />
-    <div className="absolute inset-0 bg-background/85" />
-    <div className="absolute inset-0 opacity-10" style={{
-      backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 40px, hsl(0 0% 100% / 0.03) 40px, hsl(0 0% 100% / 0.03) 41px),
-        repeating-linear-gradient(90deg, transparent, transparent 40px, hsl(0 0% 100% / 0.03) 40px, hsl(0 0% 100% / 0.03) 41px)`
-    }} />
+const trustItems = [
+  { icon: Factory, label: "Fabricação própria" },
+  { icon: Zap, label: "Atendimento rápido" },
+  { icon: Cog, label: "Peças para linha pesada" },
+  { icon: Truck, label: "Envio para todo o Brasil" },
+];
 
-    <div className="relative container mx-auto px-4 py-20 grid lg:grid-cols-2 gap-12 items-center">
-      <div className="animate-fade-up">
-        <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black uppercase leading-[0.95] mb-6">
-          Fábrica de Peças para{" "}
-          <span className="text-primary">Máquinas Pesadas</span>
-        </h1>
-        <p className="text-muted-foreground text-sm sm:text-base md:text-lg max-w-xl mb-8 leading-relaxed">
-          22 anos fabricando peças de reposição para retroescavadeiras,
-          escavadeiras e pás carregadeiras. Canoas/RS — entregamos para todo o Brasil.
-        </p>
-        <div className="flex flex-wrap gap-4">
-          <a
-            href={WA_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-whatsapp text-whatsapp-foreground px-6 py-3.5 rounded font-heading font-bold uppercase tracking-wide hover:brightness-110 transition"
-          >
-            <MessageCircle className="w-5 h-5" />
-            Falar no WhatsApp
-          </a>
-          <button
-            onClick={() => document.getElementById("produtos")?.scrollIntoView({ behavior: "smooth" })}
-            className="inline-flex items-center gap-2 border border-foreground/30 text-foreground px-6 py-3.5 rounded font-heading font-bold uppercase tracking-wide hover:border-primary hover:text-primary transition"
-          >
-            Ver Catálogo <ArrowRight className="w-4 h-4" />
-          </button>
+const HeroSection = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = () => {
+    if (!searchTerm.trim()) return;
+    const section = document.getElementById("produtos");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+      // Dispatch custom event so ProductsSection picks up the query
+      setTimeout(() => {
+        window.dispatchEvent(
+          new CustomEvent("hero-search", { detail: searchTerm.trim() })
+        );
+      }, 600);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") handleSearch();
+  };
+
+  return (
+    <>
+      <section
+        id="inicio"
+        className="relative min-h-[85vh] flex items-center overflow-hidden"
+      >
+        {/* Background */}
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${heroBg})` }}
+        />
+        <div className="absolute inset-0 bg-background/90" />
+        {/* Subtle grid */}
+        <div className="absolute inset-0 opacity-[0.04]" style={{
+          backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 60px, hsl(0 0% 100% / 0.06) 60px, hsl(0 0% 100% / 0.06) 61px),
+            repeating-linear-gradient(90deg, transparent, transparent 60px, hsl(0 0% 100% / 0.06) 60px, hsl(0 0% 100% / 0.06) 61px)`
+        }} />
+
+        <div className="relative container mx-auto px-4 py-16 md:py-24">
+          <div className="max-w-3xl mx-auto text-center animate-fade-up">
+            {/* Headline */}
+            <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase leading-[0.95] mb-4">
+              Encontre a peça certa{" "}
+              <span className="block text-primary">para sua máquina.</span>
+            </h1>
+
+            {/* Subheadline */}
+            <p className="text-muted-foreground text-sm sm:text-base md:text-lg max-w-2xl mx-auto mb-8 md:mb-10 leading-relaxed">
+              Pesquise por código, marca ou modelo e encontre com mais rapidez.
+              Se preferir, nossa equipe ajuda você a localizar a peça ideal.
+            </p>
+
+            {/* Search bar */}
+            <div className="max-w-2xl mx-auto mb-6">
+              <div className="flex flex-col sm:flex-row gap-3">
+                <div className="relative flex-1">
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground pointer-events-none" />
+                  <input
+                    type="text"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    placeholder="Digite o código, a marca ou o modelo da máquina"
+                    className="w-full h-14 md:h-16 pl-12 pr-4 rounded-lg bg-card border-2 border-border text-foreground text-sm md:text-base placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
+                  />
+                </div>
+                <button
+                  onClick={handleSearch}
+                  className="h-14 md:h-16 px-8 rounded-lg bg-primary text-primary-foreground font-heading font-bold uppercase tracking-wide text-sm md:text-base hover:brightness-110 transition flex items-center justify-center gap-2 shrink-0"
+                >
+                  <Search className="w-5 h-5" />
+                  Buscar peça
+                </button>
+              </div>
+            </div>
+
+            {/* WhatsApp secondary CTA */}
+            <a
+              href={WA_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm font-heading font-bold uppercase tracking-wide text-foreground/70 hover:text-whatsapp transition-colors"
+            >
+              <MessageCircle className="w-5 h-5 text-whatsapp" />
+              Falar no WhatsApp
+            </a>
+          </div>
         </div>
-        <div className="flex items-center gap-2 mt-4">
-          <Clock className="w-4 h-4 text-muted-foreground" />
-          <span className="text-xs text-muted-foreground">Respondemos em poucos minutos em dias úteis</span>
+      </section>
+
+      {/* Trust bar */}
+      <div className="bg-card border-y border-border">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-border">
+            {trustItems.map((item) => (
+              <div
+                key={item.label}
+                className="flex items-center justify-center gap-3 py-4 md:py-5 px-2"
+              >
+                <item.icon className="w-5 h-5 text-primary shrink-0" />
+                <span className="text-xs md:text-sm font-heading font-bold uppercase tracking-wide text-foreground/80">
+                  {item.label}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-
-      <div className="animate-fade-up [animation-delay:200ms] opacity-0">
-        <div className="grid grid-cols-2 gap-4">
-          <div className="bg-card border border-border rounded-lg p-4 md:p-6 flex flex-col items-center text-center hover:border-primary/50 transition-colors">
-            <span className="font-heading text-3xl md:text-5xl font-black text-primary">22+</span>
-            <span className="text-[10px] md:text-xs text-muted-foreground uppercase tracking-widest font-bold mt-2">Anos de Mercado</span>
-          </div>
-          <div className="bg-card border border-border rounded-lg p-4 md:p-6 flex flex-col items-center text-center hover:border-primary/50 transition-colors">
-            <span className="font-heading text-3xl md:text-5xl font-black text-primary">12+</span>
-            <span className="text-[10px] md:text-xs text-muted-foreground uppercase tracking-widest font-bold mt-2">Marcas Atendidas</span>
-          </div>
-          <div className="bg-card border border-border rounded-lg p-4 md:p-6 flex flex-col items-center text-center hover:border-primary/50 transition-colors">
-            <span className="font-heading text-3xl md:text-5xl font-black text-primary">100%</span>
-            <span className="text-[10px] md:text-xs text-muted-foreground uppercase tracking-widest font-bold mt-2">Fabricação Própria</span>
-          </div>
-          <div className="bg-card border border-border rounded-lg p-4 md:p-6 flex flex-col items-center text-center hover:border-primary/50 transition-colors">
-            <Truck className="w-8 h-8 md:w-12 md:h-12 text-primary mb-1" />
-            <span className="text-[10px] md:text-xs text-muted-foreground uppercase tracking-widest font-bold mt-2">Entrega para todo o Brasil</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    {/* Scroll indicator */}
-    <button
-      onClick={() => document.getElementById("marcas")?.scrollIntoView({ behavior: "smooth" })}
-      className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-muted-foreground hover:text-primary transition-colors cursor-pointer z-10"
-      aria-label="Rolar para baixo"
-    >
-      <span className="text-[10px] uppercase tracking-widest font-bold">Explore</span>
-      <ChevronDown className="w-6 h-6 animate-bounce" />
-    </button>
-  </section>
-);
+    </>
+  );
+};
 
 export default HeroSection;
