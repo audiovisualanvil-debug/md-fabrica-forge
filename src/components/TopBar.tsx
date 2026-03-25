@@ -1,7 +1,7 @@
 import { Zap, Phone, Truck } from "lucide-react";
 
 const TopBar = () => (
-  <div className="bg-primary text-primary-foreground py-2 px-4 text-sm font-medium">
+  <div className="bg-primary/90 text-primary-foreground py-1.5 px-4 text-sm font-medium">
     <div className="container mx-auto flex flex-wrap items-center justify-center gap-x-6 gap-y-1 text-xs md:text-sm">
       <span className="flex items-center gap-1.5">
         <Zap className="w-3.5 h-3.5" /> Segunda a Sexta 7h–18h

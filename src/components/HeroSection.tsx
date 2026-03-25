@@ -1,5 +1,11 @@
 import { useState, useRef } from "react";
 import { Search, MessageCircle, Factory, Zap, Cog, Truck } from "lucide-react";
+import imgRedutor from "@/assets/catalog/redutor.jpg";
+import imgRodaGuia from "@/assets/catalog/roda-guia.jpg";
+import imgRolete from "@/assets/catalog/rolete.jpg";
+import imgLinhaGiro from "@/assets/catalog/linha-giro.jpg";
+import imgEngrenagem from "@/assets/catalog/engrenagem.jpg";
+import imgSemiEixo from "@/assets/catalog/semi-eixo.jpg";
 
 const WA_LINK = "https://wa.me/5551997859061?text=Olá,+vim+pelo+site+e+gostaria+de+um+orçamento";
 
@@ -11,19 +17,64 @@ const trustItems = [
 ];
 
 const catalogCards = [
-  { label: "Redutor de Tração", type: "category" },
-  { label: "Roda Guia", type: "category" },
-  { label: "Rolete Inferior", type: "category" },
-  { label: "Peças JCB", type: "brand" },
-  { label: "Peças Case", type: "brand" },
-  { label: "Peças Hyundai", type: "brand" },
-  { label: "Fabricação Própria", type: "highlight" },
-  { label: "Linha de Giro", type: "category" },
-  { label: "Peças CAT", type: "brand" },
-  { label: "Semi-Eixo", type: "category" },
-  { label: "Engrenagem", type: "category" },
-  { label: "Peças Volvo", type: "brand" },
+  { image: imgRedutor, name: "Redutor de Tração", code: "Linha pesada", tag: "Fabricação Própria" },
+  { image: imgRodaGuia, name: "Roda Guia", code: "Escavadeiras", tag: null },
+  { image: imgRolete, name: "Rolete Inferior", code: "Esteiras", tag: null },
+  { image: imgLinhaGiro, name: "Linha de Giro", code: "Rolamento", tag: "Fabricação Própria" },
+  { image: imgEngrenagem, name: "Engrenagem", code: "Cód: 2105934", tag: null },
+  { image: imgSemiEixo, name: "Semi-Eixo", code: "Cód: 144461A1", tag: null },
 ];
+
+// Card positions: [translateX%, translateY%, rotate°, scale, zIndex]
+const leftPositions = [
+  ["-58%", "10%", -12, 0.88, 1],
+  ["-40%", "-20%", -6, 0.82, 2],
+  ["-22%", "30%", -3, 0.78, 3],
+];
+const rightPositions = [
+  ["58%", "5%", 11, 0.88, 1],
+  ["40%", "-25%", 5, 0.82, 2],
+  ["22%", "28%", 2, 0.78, 3],
+];
+
+const CatalogCard = ({
+  card,
+  style,
+  className = "",
+}: {
+  card: typeof catalogCards[0];
+  style: React.CSSProperties;
+  className?: string;
+}) => (
+  <div
+    className={`absolute rounded-xl overflow-hidden border border-border/60 shadow-2xl shadow-black/60 pointer-events-none select-none ${className}`}
+    style={{
+      width: "200px",
+      ...style,
+    }}
+  >
+    <div className="relative aspect-[3/4] bg-card">
+      <img
+        src={card.image}
+        alt={card.name}
+        className="w-full h-full object-cover opacity-80"
+        loading="lazy"
+        width={200}
+        height={267}
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+      {card.tag && (
+        <span className="absolute top-2 left-2 bg-primary/90 text-primary-foreground text-[9px] font-heading font-bold uppercase tracking-wider px-2 py-0.5 rounded">
+          {card.tag}
+        </span>
+      )}
+      <div className="absolute bottom-0 left-0 right-0 p-3">
+        <p className="text-foreground font-heading font-bold text-sm uppercase leading-tight">{card.name}</p>
+        <p className="text-muted-foreground text-[10px] font-heading uppercase tracking-wider mt-0.5">{card.code}</p>
+      </div>
+    </div>
+  </div>
+);
 
 const HeroSection = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -48,144 +99,148 @@ const HeroSection = () => {
     if (e.key === "Enter") handleSearch();
   };
 
-  // Split cards into left and right columns for desktop
-  const leftCards = catalogCards.filter((_, i) => i % 2 === 0);
-  const rightCards = catalogCards.filter((_, i) => i % 2 === 1);
-
-  const renderCard = (card: typeof catalogCards[0], index: number, side: "left" | "right") => {
-    const isHighlight = card.type === "highlight";
-    const isBrand = card.type === "brand";
-
-    return (
-      <div
-        key={card.label}
-        className={`
-          rounded-lg border px-4 py-3 text-left transition-all duration-500
-          ${isHighlight
-            ? "bg-primary/10 border-primary/30"
-            : isBrand
-              ? "bg-card/80 border-border"
-              : "bg-card/60 border-border/60"
-          }
-        `}
-        style={{
-          animationDelay: `${index * 120 + 300}ms`,
-          transform: `rotate(${side === "left" ? -2 + index * 0.5 : 1.5 - index * 0.4}deg)`,
-        }}
-      >
-        <span className={`text-[11px] font-heading font-bold uppercase tracking-wider ${
-          isHighlight ? "text-primary" : isBrand ? "text-foreground/70" : "text-foreground/50"
-        }`}>
-          {card.label}
-        </span>
-      </div>
-    );
-  };
+  const leftCards = catalogCards.slice(0, 3);
+  const rightCards = catalogCards.slice(3, 6);
 
   return (
     <>
       <section
         id="inicio"
-        className="relative min-h-[82vh] md:min-h-[88vh] flex items-center overflow-hidden"
+        className="relative min-h-[88vh] flex items-center overflow-hidden"
       >
         {/* Background */}
         <div className="absolute inset-0 bg-background" />
-        <div className="absolute inset-0 opacity-[0.025]" style={{
+        <div className="absolute inset-0 opacity-[0.02]" style={{
           backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--foreground)) 0.5px, transparent 0)`,
-          backgroundSize: "24px 24px",
+          backgroundSize: "20px 20px",
         }} />
 
-        {/* Ambient glow */}
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] rounded-full opacity-[0.05] blur-[100px] pointer-events-none"
-          style={{ background: "hsl(var(--primary))" }}
-        />
+        {/* Ambient glows */}
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] rounded-full opacity-[0.07] blur-[120px] pointer-events-none" style={{ background: "hsl(var(--primary))" }} />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[300px] rounded-full opacity-[0.04] blur-[100px] pointer-events-none" style={{ background: "hsl(var(--primary))" }} />
+        <div className="absolute bottom-0 right-0 w-[400px] h-[300px] rounded-full opacity-[0.04] blur-[100px] pointer-events-none" style={{ background: "hsl(var(--primary))" }} />
 
-        <div className="relative container mx-auto px-4 py-12 md:py-16">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(0,560px)_1fr] gap-6 items-center">
+        <div className="relative container mx-auto px-4 py-12 md:py-16 w-full">
+          {/* Floating catalog cards — desktop only */}
+          <div className="hidden lg:block absolute inset-0 pointer-events-none" aria-hidden="true">
+            <div className="relative w-full h-full flex items-center justify-center">
+              {leftCards.map((card, i) => (
+                <CatalogCard
+                  key={card.name}
+                  card={card}
+                  className="animate-fade-up opacity-0"
+                  style={{
+                    left: "50%",
+                    top: "50%",
+                    transform: `translate(${leftPositions[i][0]}, ${leftPositions[i][1]}) rotate(${leftPositions[i][2]}deg) scale(${leftPositions[i][3]})`,
+                    zIndex: leftPositions[i][4] as number,
+                    animationDelay: `${400 + i * 150}ms`,
+                  }}
+                />
+              ))}
+              {rightCards.map((card, i) => (
+                <CatalogCard
+                  key={card.name}
+                  card={card}
+                  className="animate-fade-up opacity-0"
+                  style={{
+                    left: "50%",
+                    top: "50%",
+                    transform: `translate(${rightPositions[i][0]}, ${rightPositions[i][1]}) rotate(${rightPositions[i][2]}deg) scale(${rightPositions[i][3]})`,
+                    zIndex: rightPositions[i][4] as number,
+                    animationDelay: `${500 + i * 150}ms`,
+                  }}
+                />
+              ))}
+            </div>
+          </div>
 
-            {/* Left floating cards — desktop only */}
-            <div className="hidden lg:flex flex-col gap-3 items-end pr-4 animate-fade-up [animation-delay:400ms] opacity-0">
-              {leftCards.map((card, i) => renderCard(card, i, "left"))}
+          {/* Center content */}
+          <div className="relative z-10 max-w-2xl mx-auto text-center">
+            <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] font-black uppercase leading-[0.95] mb-5 animate-fade-up text-foreground">
+              Encontre a peça certa
+              <span className="block text-primary mt-1">para sua máquina</span>
+            </h1>
+
+            <p className="text-muted-foreground text-sm md:text-base max-w-lg mx-auto mb-10 leading-relaxed animate-fade-up [animation-delay:100ms] opacity-0">
+              Pesquise por código, marca ou modelo. Se preferir, nossa equipe localiza para você.
+            </p>
+
+            {/* Search bar — larger and more prominent */}
+            <div className="animate-fade-up [animation-delay:200ms] opacity-0 max-w-xl mx-auto mb-5">
+              <div
+                className={`relative flex items-center rounded-xl border-2 transition-all duration-300 bg-card ${
+                  isFocused
+                    ? "border-primary shadow-[0_0_30px_-4px_hsl(var(--primary)/0.5),0_0_60px_-8px_hsl(var(--primary)/0.2)]"
+                    : "border-border/80 hover:border-muted-foreground/40 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.6)]"
+                }`}
+              >
+                <Search className={`absolute left-5 w-6 h-6 pointer-events-none transition-colors ${isFocused ? "text-primary" : "text-muted-foreground"}`} />
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  onFocus={() => setIsFocused(true)}
+                  onBlur={() => setIsFocused(false)}
+                  onKeyDown={handleKeyDown}
+                  placeholder="Ex: 84254289, JCB 3C, redutor de tração"
+                  className="w-full h-16 md:h-[72px] pl-14 pr-32 md:pr-40 bg-transparent text-foreground text-base md:text-lg placeholder:text-muted-foreground/50 focus:outline-none"
+                />
+                <button
+                  onClick={handleSearch}
+                  className="absolute right-2.5 h-11 md:h-[52px] px-6 md:px-8 rounded-lg bg-primary text-primary-foreground font-heading font-bold uppercase tracking-wide text-sm md:text-base hover:brightness-110 active:scale-[0.97] transition-all flex items-center gap-2"
+                >
+                  <Search className="w-5 h-5" />
+                  Buscar peça
+                </button>
+              </div>
             </div>
 
-            {/* Center — Main content */}
-            <div className="text-center z-10">
-              <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-black uppercase leading-[1] mb-4 animate-fade-up text-foreground">
-                Encontre a peça certa
-                <span className="block text-primary mt-1">para sua máquina</span>
-              </h1>
+            {/* WhatsApp */}
+            <div className="animate-fade-up [animation-delay:300ms] opacity-0 mb-10">
+              <a
+                href={WA_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-whatsapp/10 border border-whatsapp/20 text-whatsapp font-heading font-bold uppercase tracking-wide text-xs hover:bg-whatsapp/20 transition-colors"
+              >
+                <MessageCircle className="w-4 h-4" />
+                Falar no WhatsApp
+              </a>
+            </div>
 
-              <p className="text-muted-foreground text-sm md:text-base max-w-md mx-auto mb-8 leading-relaxed animate-fade-up [animation-delay:100ms] opacity-0">
-                Pesquise por código, marca ou modelo. Se preferir, nossa equipe localiza para você.
-              </p>
-
-              {/* Search bar */}
-              <div className="animate-fade-up [animation-delay:200ms] opacity-0 max-w-lg mx-auto mb-4">
-                <div
-                  className={`relative flex items-center rounded-lg border-2 transition-all duration-300 bg-card ${
-                    isFocused
-                      ? "border-primary shadow-[0_0_24px_-4px_hsl(var(--primary)/0.4)]"
-                      : "border-border hover:border-muted-foreground/30"
-                  }`}
-                >
-                  <Search className="absolute left-4 w-5 h-5 text-muted-foreground pointer-events-none" />
-                  <input
-                    ref={inputRef}
-                    type="text"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    onFocus={() => setIsFocused(true)}
-                    onBlur={() => setIsFocused(false)}
-                    onKeyDown={handleKeyDown}
-                    placeholder="Ex: 84254289, JCB 3C, redutor de tração"
-                    className="w-full h-14 md:h-16 pl-12 pr-28 md:pr-36 bg-transparent text-foreground text-sm md:text-base placeholder:text-muted-foreground/50 focus:outline-none"
-                  />
-                  <button
-                    onClick={handleSearch}
-                    className="absolute right-2 h-10 md:h-12 px-4 md:px-6 rounded-md bg-primary text-primary-foreground font-heading font-bold uppercase tracking-wide text-xs md:text-sm hover:brightness-110 active:scale-[0.97] transition-all flex items-center gap-2"
+            {/* Mobile: scrollable catalog row */}
+            <div className="lg:hidden animate-fade-up [animation-delay:400ms] opacity-0">
+              <div className="flex gap-3 overflow-x-auto pb-4 -mx-4 px-4 snap-x snap-mandatory scrollbar-hide">
+                {catalogCards.map((card) => (
+                  <div
+                    key={card.name}
+                    className="snap-start shrink-0 w-36 rounded-lg overflow-hidden border border-border/60 bg-card shadow-lg"
                   >
-                    <Search className="w-4 h-4" />
-                    <span className="hidden sm:inline">Buscar</span>
-                  </button>
-                </div>
-              </div>
-
-              {/* WhatsApp */}
-              <div className="animate-fade-up [animation-delay:300ms] opacity-0 mb-8">
-                <a
-                  href={WA_LINK}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md bg-whatsapp/10 border border-whatsapp/20 text-whatsapp font-heading font-bold uppercase tracking-wide text-xs hover:bg-whatsapp/20 transition-colors"
-                >
-                  <MessageCircle className="w-4 h-4" />
-                  Falar no WhatsApp
-                </a>
-              </div>
-
-              {/* Mobile catalog chips */}
-              <div className="flex flex-wrap justify-center gap-2 lg:hidden animate-fade-up [animation-delay:400ms] opacity-0">
-                {catalogCards.slice(0, 8).map((card) => (
-                  <span
-                    key={card.label}
-                    className={`text-[10px] font-heading font-bold uppercase tracking-wider px-3 py-1.5 rounded border ${
-                      card.type === "highlight"
-                        ? "bg-primary/10 border-primary/30 text-primary"
-                        : card.type === "brand"
-                          ? "bg-card border-border text-foreground/60"
-                          : "bg-card/60 border-border/50 text-foreground/40"
-                    }`}
-                  >
-                    {card.label}
-                  </span>
+                    <div className="relative aspect-[3/4]">
+                      <img
+                        src={card.image}
+                        alt={card.name}
+                        className="w-full h-full object-cover opacity-80"
+                        loading="lazy"
+                        width={144}
+                        height={192}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+                      {card.tag && (
+                        <span className="absolute top-1.5 left-1.5 bg-primary/90 text-primary-foreground text-[8px] font-heading font-bold uppercase tracking-wider px-1.5 py-0.5 rounded">
+                          {card.tag}
+                        </span>
+                      )}
+                      <div className="absolute bottom-0 left-0 right-0 p-2.5">
+                        <p className="text-foreground font-heading font-bold text-xs uppercase leading-tight">{card.name}</p>
+                        <p className="text-muted-foreground text-[9px] font-heading uppercase tracking-wider mt-0.5">{card.code}</p>
+                      </div>
+                    </div>
+                  </div>
                 ))}
               </div>
-            </div>
-
-            {/* Right floating cards — desktop only */}
-            <div className="hidden lg:flex flex-col gap-3 items-start pl-4 animate-fade-up [animation-delay:500ms] opacity-0">
-              {rightCards.map((card, i) => renderCard(card, i, "right"))}
             </div>
           </div>
         </div>
