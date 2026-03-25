@@ -47,7 +47,7 @@ const CatalogCard = ({
   className?: string;
 }) => (
   <div
-    className={`absolute rounded-xl overflow-hidden border border-border/60 shadow-2xl shadow-black/60 pointer-events-none select-none ${className}`}
+    className={`absolute rounded-xl overflow-hidden border border-border/60 shadow-2xl shadow-black/60 pointer-events-auto select-none transition-all duration-500 ease-out hover:scale-105 hover:shadow-[0_20px_60px_-10px_hsl(var(--primary)/0.3)] hover:border-primary/40 hover:z-50 ${className}`}
     style={{
       width: "200px",
       ...style,
