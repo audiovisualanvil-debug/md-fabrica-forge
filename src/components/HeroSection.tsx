@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { Search, MessageCircle, Factory, Zap, Cog, Truck } from "lucide-react";
 import imgRedutor from "@/assets/catalog/redutor.jpg";
 import imgRodaGuia from "@/assets/catalog/roda-guia.jpg";
