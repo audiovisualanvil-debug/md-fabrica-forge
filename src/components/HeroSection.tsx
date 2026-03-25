@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { Search, MessageCircle, Factory, Zap, Cog, Truck } from "lucide-react";
 import imgRedutor from "@/assets/catalog/redutor.jpg";
 import imgRodaGuia from "@/assets/catalog/roda-guia.jpg";
@@ -80,6 +80,22 @@ const HeroSection = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [scrollY, setScrollY] = useState(0);
+
+  const handleScroll = useCallback(() => {
+    if (sectionRef.current) {
+      const rect = sectionRef.current.getBoundingClientRect();
+      if (rect.bottom > 0) {
+        setScrollY(window.scrollY);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [handleScroll]);
 
   const handleSearch = () => {
     if (!searchTerm.trim()) {
@@ -105,6 +121,7 @@ const HeroSection = () => {
   return (
     <>
       <section
+        ref={sectionRef}
         id="inicio"
         className="relative min-h-[auto] lg:min-h-[88vh] flex items-center overflow-hidden"
       >
@@ -124,34 +141,42 @@ const HeroSection = () => {
           {/* Floating catalog cards — desktop only */}
           <div className="hidden lg:block absolute inset-0 pointer-events-none" aria-hidden="true">
             <div className="relative w-full h-full flex items-center justify-center">
-              {leftCards.map((card, i) => (
-                <CatalogCard
-                  key={card.name}
-                  card={card}
-                  className="animate-fade-up opacity-0"
-                  style={{
-                    left: leftPositions[i][0] as string,
-                    top: leftPositions[i][1] as string,
-                    transform: `rotate(${leftPositions[i][2]}deg) scale(${leftPositions[i][3]})`,
-                    zIndex: leftPositions[i][4] as number,
-                    animationDelay: `${400 + i * 150}ms`,
-                  }}
-                />
-              ))}
-              {rightCards.map((card, i) => (
-                <CatalogCard
-                  key={card.name}
-                  card={card}
-                  className="animate-fade-up opacity-0"
-                  style={{
-                    left: rightPositions[i][0] as string,
-                    top: rightPositions[i][1] as string,
-                    transform: `rotate(${rightPositions[i][2]}deg) scale(${rightPositions[i][3]})`,
-                    zIndex: rightPositions[i][4] as number,
-                    animationDelay: `${500 + i * 150}ms`,
-                  }}
-                />
-              ))}
+              {leftCards.map((card, i) => {
+                const speed = [0.08, 0.12, 0.06][i];
+                const parallaxY = scrollY * speed;
+                return (
+                  <CatalogCard
+                    key={card.name}
+                    card={card}
+                    className="animate-fade-up opacity-0 transition-none"
+                    style={{
+                      left: leftPositions[i][0] as string,
+                      top: leftPositions[i][1] as string,
+                      transform: `rotate(${leftPositions[i][2]}deg) scale(${leftPositions[i][3]}) translateY(${parallaxY}px)`,
+                      zIndex: leftPositions[i][4] as number,
+                      animationDelay: `${400 + i * 150}ms`,
+                    }}
+                  />
+                );
+              })}
+              {rightCards.map((card, i) => {
+                const speed = [0.1, 0.05, 0.14][i];
+                const parallaxY = scrollY * speed;
+                return (
+                  <CatalogCard
+                    key={card.name}
+                    card={card}
+                    className="animate-fade-up opacity-0 transition-none"
+                    style={{
+                      left: rightPositions[i][0] as string,
+                      top: rightPositions[i][1] as string,
+                      transform: `rotate(${rightPositions[i][2]}deg) scale(${rightPositions[i][3]}) translateY(${parallaxY}px)`,
+                      zIndex: rightPositions[i][4] as number,
+                      animationDelay: `${500 + i * 150}ms`,
+                    }}
+                  />
+                );
+              })}
             </div>
           </div>
 
