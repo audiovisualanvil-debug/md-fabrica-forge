@@ -27,7 +27,6 @@ const Index = () => (
     <ContactSection />
     <Footer />
     <WhatsAppFloat />
-    <LiveChatWidget />
   </div>
 );
 
