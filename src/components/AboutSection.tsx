@@ -10,21 +10,21 @@ const diffs = [
 ];
 
 const AboutSection = () => (
-  <section id="sobre" className="section-padding">
+  <section id="sobre" className="py-20 md:py-28 px-4 md:px-8">
     <div className="container mx-auto grid lg:grid-cols-2 gap-12 items-start">
       <div>
         <span className="text-xs uppercase tracking-[0.3em] text-primary font-bold">
           Quem somos
         </span>
-        <h2 className="font-heading text-3xl md:text-4xl font-black uppercase mt-3 mb-6 text-foreground">
+        <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-black uppercase mt-3 mb-6 text-foreground">
           Quem é a MD Fábrica
         </h2>
-        <p className="text-muted-foreground leading-relaxed mb-4">
+        <p className="text-muted-foreground leading-relaxed mb-4 text-sm md:text-base">
           A MD Fábrica nasceu em 2003 em Canoas, no maior polo metalmecânico do
           Rio Grande do Sul. Em 22 anos nos tornamos referência regional na
           fabricação de peças para máquinas pesadas.
         </p>
-        <p className="text-muted-foreground leading-relaxed mb-8">
+        <p className="text-muted-foreground leading-relaxed mb-8 text-sm md:text-base">
           Nossa linha de produção própria garante controle total de qualidade —
           cada peça passa por testes em bancada especializada antes de chegar até
           você.
@@ -47,10 +47,10 @@ const AboutSection = () => (
             className="bg-card border border-border rounded-lg p-5 hover:border-primary/50 transition-colors"
           >
             <d.icon className="w-8 h-8 text-primary mb-3" />
-            <h3 className="font-heading text-lg font-bold text-foreground uppercase">
+            <h3 className="font-heading text-base md:text-lg font-bold text-foreground uppercase">
               {d.title}
             </h3>
-            <p className="text-sm text-muted-foreground mt-1">{d.desc}</p>
+            <p className="text-xs md:text-sm text-muted-foreground mt-1">{d.desc}</p>
           </div>
         ))}
       </div>

@@ -1,7 +1,6 @@
 import { Cog, Wrench, Truck, MessageCircle } from "lucide-react";
 
 const WA_LINK = "https://wa.me/5551997859061?text=Olá,+vim+pelo+site+e+gostaria+de+um+orçamento";
-const INSTAGRAM_POST = "https://www.instagram.com/p/C__rMEdRl4d/";
 
 const services = [
   {
@@ -22,13 +21,13 @@ const services = [
 ];
 
 const ServicesSection = () => (
-  <section className="section-padding">
+  <section className="py-14 md:py-20 px-4 md:px-8">
     <div className="container mx-auto">
       <div className="text-center mb-12">
         <span className="text-xs uppercase tracking-[0.3em] text-primary font-bold">
           Soluções
         </span>
-        <h2 className="font-heading text-3xl md:text-4xl font-black uppercase mt-3 text-foreground">
+        <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-black uppercase mt-3 text-foreground">
           Conheça Nossos Serviços
         </h2>
       </div>
@@ -54,10 +53,10 @@ const ServicesSection = () => (
             <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-5">
               <s.icon className="w-8 h-8 text-primary" />
             </div>
-            <h3 className="font-heading text-xl font-bold text-foreground uppercase mb-3">
+            <h3 className="font-heading text-lg md:text-xl font-bold text-foreground uppercase mb-3">
               {s.title}
             </h3>
-            <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+            <p className="text-xs md:text-sm text-muted-foreground leading-relaxed mb-6">
               {s.desc}
             </p>
             <a
