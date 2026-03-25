@@ -11,6 +11,7 @@ import CTABanner from "@/components/CTABanner";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
+import LiveChatWidget from "@/components/LiveChatWidget";
 
 const Index = () => (
   <div className="min-h-screen">
@@ -27,6 +28,7 @@ const Index = () => (
     <ContactSection />
     <Footer />
     <WhatsAppFloat />
+    <LiveChatWidget />
   </div>
 );
 
