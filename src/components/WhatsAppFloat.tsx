@@ -74,7 +74,7 @@ const WhatsAppFloat = () => {
           </div>
 
           <div className="px-4 py-2 text-center" style={{ borderTop: "1px solid #2a2a2a" }}>
-            <span className="text-[11px] text-gray-500">Seg–Sex · 7h às 18h</span>
+            <span className="text-[11px] text-gray-500">Respondemos em poucos minutos · Seg–Sex · 7h às 18h</span>
           </div>
         </div>
       )}
