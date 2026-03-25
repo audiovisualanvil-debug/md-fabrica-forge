@@ -106,7 +106,7 @@ const HeroSection = () => {
     <>
       <section
         id="inicio"
-        className="relative min-h-[88vh] flex items-center overflow-hidden"
+        className="relative min-h-[auto] lg:min-h-[88vh] flex items-center overflow-hidden"
       >
         {/* Background */}
         <div className="absolute inset-0 bg-background" />
@@ -162,20 +162,20 @@ const HeroSection = () => {
               <span className="block text-primary mt-1">para sua máquina</span>
             </h1>
 
-            <p className="text-muted-foreground text-sm md:text-base max-w-lg mx-auto mb-10 leading-relaxed animate-fade-up [animation-delay:100ms] opacity-0">
+            <p className="text-muted-foreground text-sm md:text-base max-w-lg mx-auto mb-8 md:mb-10 leading-relaxed animate-fade-up [animation-delay:100ms] opacity-0">
               Pesquise por código, marca ou modelo. Se preferir, nossa equipe localiza para você.
             </p>
 
-            {/* Search bar — larger and more prominent */}
-            <div className="animate-fade-up [animation-delay:200ms] opacity-0 max-w-xl mx-auto mb-5">
+            {/* Search bar */}
+            <div className="animate-fade-up [animation-delay:200ms] opacity-0 max-w-xl mx-auto mb-4">
               <div
-                className={`relative flex items-center rounded-xl border-2 transition-all duration-300 bg-card ${
+                className={`relative flex flex-col sm:flex-row items-stretch sm:items-center rounded-xl border-2 transition-all duration-300 bg-card ${
                   isFocused
                     ? "border-primary shadow-[0_0_30px_-4px_hsl(var(--primary)/0.5),0_0_60px_-8px_hsl(var(--primary)/0.2)]"
                     : "border-border/80 hover:border-muted-foreground/40 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.6)]"
                 }`}
               >
-                <Search className={`absolute left-5 w-6 h-6 pointer-events-none transition-colors ${isFocused ? "text-primary" : "text-muted-foreground"}`} />
+                <Search className={`absolute left-4 sm:left-5 top-[18px] sm:top-1/2 sm:-translate-y-1/2 w-5 h-5 sm:w-6 sm:h-6 pointer-events-none transition-colors ${isFocused ? "text-primary" : "text-muted-foreground"}`} />
                 <input
                   ref={inputRef}
                   type="text"
@@ -185,11 +185,11 @@ const HeroSection = () => {
                   onBlur={() => setIsFocused(false)}
                   onKeyDown={handleKeyDown}
                   placeholder="Ex: 84254289, JCB 3C, redutor de tração"
-                  className="w-full h-16 md:h-[72px] pl-14 pr-32 md:pr-40 bg-transparent text-foreground text-base md:text-lg placeholder:text-muted-foreground/50 focus:outline-none"
+                  className="w-full h-14 sm:h-16 md:h-[72px] pl-12 sm:pl-14 pr-4 sm:pr-32 md:pr-40 bg-transparent text-foreground text-[15px] sm:text-base md:text-lg placeholder:text-foreground/30 focus:outline-none"
                 />
                 <button
                   onClick={handleSearch}
-                  className="absolute right-2.5 h-11 md:h-[52px] px-6 md:px-8 rounded-lg bg-primary text-primary-foreground font-heading font-bold uppercase tracking-wide text-sm md:text-base hover:brightness-110 active:scale-[0.97] transition-all flex items-center gap-2"
+                  className="sm:absolute sm:right-2.5 h-12 sm:h-11 md:h-[52px] px-6 md:px-8 mx-2 mb-2 sm:m-0 rounded-lg bg-primary text-primary-foreground font-heading font-bold uppercase tracking-wide text-sm md:text-base hover:brightness-110 active:scale-[0.97] transition-all flex items-center justify-center gap-2"
                 >
                   <Search className="w-5 h-5" />
                   Buscar peça
@@ -198,7 +198,7 @@ const HeroSection = () => {
             </div>
 
             {/* WhatsApp */}
-            <div className="animate-fade-up [animation-delay:300ms] opacity-0 mb-10">
+            <div className="animate-fade-up [animation-delay:300ms] opacity-0 mb-8 md:mb-10">
               <a
                 href={WA_LINK}
                 target="_blank"
@@ -210,13 +210,16 @@ const HeroSection = () => {
               </a>
             </div>
 
-            {/* Mobile: scrollable catalog row */}
+            {/* Mobile: catalog carousel */}
             <div className="lg:hidden animate-fade-up [animation-delay:400ms] opacity-0">
+              <p className="text-[10px] font-heading font-bold uppercase tracking-[0.25em] text-muted-foreground mb-3 text-left pl-1">
+                Peças mais buscadas
+              </p>
               <div className="flex gap-3 overflow-x-auto pb-4 -mx-4 px-4 snap-x snap-mandatory scrollbar-hide">
                 {catalogCards.map((card) => (
                   <div
                     key={card.name}
-                    className="snap-start shrink-0 w-36 rounded-lg overflow-hidden border border-border/60 bg-card shadow-lg"
+                    className="snap-start shrink-0 w-[42vw] max-w-[180px] rounded-lg overflow-hidden border border-border/60 bg-card shadow-lg"
                   >
                     <div className="relative aspect-[3/4]">
                       <img
@@ -224,18 +227,18 @@ const HeroSection = () => {
                         alt={card.name}
                         className="w-full h-full object-cover opacity-80"
                         loading="lazy"
-                        width={144}
-                        height={192}
+                        width={180}
+                        height={240}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
                       {card.tag && (
-                        <span className="absolute top-1.5 left-1.5 bg-primary/90 text-primary-foreground text-[8px] font-heading font-bold uppercase tracking-wider px-1.5 py-0.5 rounded">
+                        <span className="absolute top-2 left-2 bg-primary/90 text-primary-foreground text-[8px] font-heading font-bold uppercase tracking-wider px-1.5 py-0.5 rounded">
                           {card.tag}
                         </span>
                       )}
-                      <div className="absolute bottom-0 left-0 right-0 p-2.5">
-                        <p className="text-foreground font-heading font-bold text-xs uppercase leading-tight">{card.name}</p>
-                        <p className="text-muted-foreground text-[9px] font-heading uppercase tracking-wider mt-0.5">{card.code}</p>
+                      <div className="absolute bottom-0 left-0 right-0 p-3">
+                        <p className="text-foreground font-heading font-bold text-[13px] uppercase leading-tight">{card.name}</p>
+                        <p className="text-foreground/50 text-[10px] font-heading uppercase tracking-wider mt-0.5">{card.code}</p>
                       </div>
                     </div>
                   </div>
